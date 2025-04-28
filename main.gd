@@ -17,8 +17,10 @@ func _ready():
 	# Debug print
 	print("Running with ", num_threads, 
 		  " threads and ", object_count, " objects")
-		
-	ProjectSettings.set_setting("physics/3d/run_on_separate_thread", true)
+	if num_threads > 1:
+		ProjectSettings.set_setting("physics/3d/run_on_separate_thread", true)
+	else:
+		ProjectSettings.set_setting("physics/3d/run_on_separate_thread", false)
 
 	print("--- STRONG SCALING BENCHMARK START ---")
 	spawn_objects(object_count)
